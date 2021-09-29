@@ -36,11 +36,11 @@ namespace KawaiiAPI_Request_Example
             //Sets FollowRedirects to true so we can handle our Request.
             http.FollowRedirects = true;
 
-            //Your Own API Token.
-            var kawaii_token = "";
+            //Your Own kawaii API Token.
+            var kawaii_API_token = "";
 
             //The Website which we can modify.
-            var website = $"https://kawaii.red/api/{main}/{actiontype}/token={kawaii_token}&filter={filters}";
+            var website = $"https://kawaii.red/api/{main}/{actiontype}/token={kawaii_API_token}&filter={filters}";
 
             //Make the request and get the Redirect page.
             http.QuickGet(website);
