@@ -1,35 +1,19 @@
-﻿using System;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
+﻿//Our Handle Request gets Created.
+    using System;
+    using System.Net.Http;
 
-namespace KawaiiAPI_Request_Example
-{
-    public static class Program
+    //Your Own kawaii API Token.
+    var kawaii_API_token = "";
+    
+    //Make the request and make the actually call.
+    using (var client = new HttpClient())
     {
-        public static IHostBuilder CreateHostingConfig(string[] args)
-        {
-            //Adds all needed Services to the collection.
-            var hostBuilder = Host.CreateDefaultBuilder(args)
-                .ConfigureServices((context, collection) => collection
-                    .AddHttpClient()
-                    .AddSingleton<PrintApiDetails>()
-                    .AddHostedService(x => x.GetRequiredService<PrintApiDetails>()));
+        var response = await client.GetAsync(
+            string.Format("http://kawaii.red/api/gif/{0}/token={1}&type=txt/", "kiss", kawaii_API_token, new int[] { })
+        );
 
-            return hostBuilder;
-        }
-
-        public static void Main(string[] args)
+        if (response.IsSuccessStatusCode && await response.Content.ReadAsStringAsync() is { } parsed)
         {
-            try
-            {
-                using var host = CreateHostingConfig(args).Build();
-                host.Run();
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-                Console.ReadLine();
-            }
+            Console.WriteLine($"Website is | {parsed}");
         }
     }
-}
