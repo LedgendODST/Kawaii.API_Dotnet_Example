@@ -1,0 +1,14 @@
+# IDE & Editor config
+.idea/
+.vs/
+.vscode/
+
+# compiler output and build objects
+obj/
+bin/
+
+# assets etc
+assets/
+
+# Config
+config.json
